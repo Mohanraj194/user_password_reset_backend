@@ -58,7 +58,15 @@ app.put("/reset-password", async (req,res)=>{
 
         let resetMailToBeSend = sampleMail;
         mailOptions.html = resetMailToBeSend;
-        await transporter.sendMail(mailOptions)
+         transporter.sendMail(mailOptions,(err,info)=>{
+          if(err)
+          {
+            console.log(err)
+          }
+          else{
+            console.log(info)
+          }
+        })
       res.status(200).json({
         message: "Verification mail is sent"
       });
